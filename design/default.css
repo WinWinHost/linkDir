@@ -1,0 +1,248 @@
+/**
+ *  Wrapper
+**/
+
+div.linkdir_block{
+	width:100%;
+	background-color:#FFF;
+	font-size:13px !important;
+	margin-bottom:15px;
+}
+
+/**
+ *  Navigation Bar
+**/
+
+div.linkdir_block div.linkdir_navi{
+	background-color:#333;
+	display:block;
+	text-align:right;
+	line-height:35px;
+	padding:0 10px;
+	margin-bottom:8px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+}
+
+div.linkdir_block div.linkdir_navi a{
+	color:#FFF;
+	text-decoration:none;
+	display:inline-block;
+	line-height:35px;
+	padding:0 10px;
+}
+
+div.linkdir_block div.linkdir_navi a:hover{
+	background-color:#999;
+}
+
+/**
+ *  Error/Success Messages
+**/
+
+p.linkdir_error{
+	background-color:#F18E8F;
+	border:6px solid #D5304B;
+	padding:8px;
+	font-weight:bold;
+	color:#FFF;
+	margin:10px 0;
+}
+
+p.linkdir_success{
+	background-color:#9FD562;
+	border:6px solid #62C830;
+	padding:8px;
+	font-weight:bold;
+	color:#FFF;
+	margin:10px 0;
+}
+
+/**
+*  Directory Listing
+**/
+
+div.linkdir_unit{
+	border:1px solid #e6e6e6;
+	padding:10px;
+	margin:13px 0;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	display:block;
+}
+
+div.linkdir_unit a.linkdir_title{
+	color:#0969A2;
+	font-weight:bold;
+	display:block;
+	text-decoration:none;
+}
+
+div.linkdir_unit a.linkdir_description,div.linkdir_unit a.linkdir_description:hover{
+	color:#999;
+	display:block;
+	text-decoration:none;
+	margin-top:4px;
+}
+
+div.linkdir_unit a.linkdir_title span.linkdir_num{
+	font-size:10px;
+	color:#999;
+	background-color:#e6e6e6;
+	padding:2px 4px;
+	-webkit-border-radius:3px;
+	-moz-border-radius:3px;
+	border-radius:3px;
+	position:relative;
+	top:-1px;
+	font-weight:normal;
+}
+
+div.linkdir_unit a.linkdir_title:hover{
+	color:#0969A2;
+	text-decoration:none;
+}
+
+h2.linkdir_cat_title{
+	font-size:18px;
+	font-family:Arial,Helvetica,sans-serif;
+	margin:0 0 2px 0;
+	color:#000;
+}
+
+div.linkdir_link_unit{
+	border:1px solid #e6e6e6;
+	padding:10px;
+	margin:13px 0;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	display:block;
+	min-height:68px;
+}
+
+div.linkdir_link_unit a{
+	font-weight:bold;
+	font-size:14px;
+}
+
+div.linkdir_link_unit p{
+	color:#999;
+}
+
+span.linkdir_small_url{
+	color:#ccc;
+	font-size:10px;
+}
+
+/**
+* Page Navigation
+**/
+
+div.linkdir_pagenavi{
+	text-align:center;
+	margin:10px 0;
+}
+
+div.linkdir_pagenavi a{
+	display:inline-block;
+	padding:4px 8px 3px 8px;
+	font-weight:bold;
+	font-family:;
+	font-size:13px;
+	border:1px solid #ccc;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	color:#000;
+	background:url(gray_grad.png) 0 0 repeat-x scroll transparent;
+	text-decoration:none;
+}
+
+div.linkdir_pagenavi a:hover{
+	display:inline-block;
+	padding:4px 8px 3px 8px;
+	font-weight:bold;
+	font-family:;
+	font-size:13px;
+	border:1px solid #999;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	color:#000;
+	background:url(gray_grad.png) 0 0 repeat-x scroll transparent;
+	text-decoration:none;
+}
+
+div.linkdir_pagenavi a:focus{
+	display:inline-block;
+	padding:4px 8px 3px 8px;
+	font-weight:bold;
+	font-family:;
+	font-size:13px;
+	border:1px solid #999;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	color:#000;
+	background:#ccc;
+	text-decoration:none;
+}
+
+div.linkdir_pagenavi a.current{
+	display:inline-block;
+	padding:4px 8px 3px 8px;
+	font-weight:bold;
+	font-family:;
+	font-size:13px;
+	border:1px solid #999;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	color:#000;
+	background:#ccc;
+	text-decoration:none;
+}
+
+
+/**
+*  Other / Misc
+**/
+
+span.linkdir_desc{
+	font-size:10px;
+	color:#999;
+}
+
+label.linkdir_label{
+	display:block;
+	color:#333;
+}
+
+p.linkdir_empty{
+	display:block;
+	padding:8px;
+	background-color:#dddddd;
+	color:#777777;
+	-webkit-box-shadow: 0px 0px 10px 0px #a8a8a8;
+	-moz-box-shadow: 0px 0px 10px 0px #a8a8a8;
+	box-shadow: 0px 0px 10px 0px #a8a8a8;
+}
+
+p.linkdir_desc{
+	color:#999;
+	padding-left:10px;
+}
+
+div.linkdir_link_unit p{
+	margin-bottom:0 !important;
+}
+
+a.linkdir_poweredby{
+	width:131px;
+	height:18px;
+	background:url(powered.png) 0 0 no-repeat scroll transparent;
+	display:inline-block;
+}
