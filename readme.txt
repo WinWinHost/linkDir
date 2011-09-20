@@ -41,7 +41,7 @@ This is a very first release of the plugin, so bugs are predicted to show up. It
 None
 
 == Changelog ==
-= Version 1.1 =
+= Version 1.2 =
 
 == Upgrade Notice ==
 
