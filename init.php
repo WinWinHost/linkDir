@@ -3,7 +3,8 @@
 /*
 	Plugin Name: LinkDir
 	Plugin URI: http://www.winwinhost.com/
-	Description: Description goes here.
+	Description: With this plugin you can make a website directory where visitors can add new websites.You also have the posibility to add new categories from your Dashboard and new websites into categories from your website directory page.
+Every 24 hours the plugin runs a formula to calculate the page rank of every website from all the categories.
 	Version: 1.1
 	Author: WinWinHost, Inc.
 	Author URI: http://www.winwinhost.com/
@@ -17,7 +18,7 @@ define("LINKDIR_PROCESSING",dirname(__FILE__)."/processing.php");
 define("LINKDIR_ROOT",dirname(__FILE__)."/");
 list($url) = explode("/",plugin_basename(__FILE__));
 define("LINKDIR_URL","/wp-content/plugins/".$url."/");
-define("LINKDIR_MOREINFO","http://www.winwinhost.com/");
+define("LINKDIR_MOREINFO","http://www.winwinhost.com/page.php/opensource/link-directory/");
 
 require_once(LINKDIR_PROCESSING);
 
