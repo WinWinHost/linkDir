@@ -473,7 +473,8 @@ $GLOBALS['x'] =$GLOBALS['x'].
 
 function getlink($type,$id = "",$page = ""){
 	global $post;
-	$str = get_option("siteurl")."/?".(!isset($_GET['post_id'])?"post_id=".$post->ID."&":"")."linkdir=".$type.(!empty($id)?"&_id=".$id:"");
+	$str = 
+get_option("siteurl")."/?".(!isset($_GET['page_id'])?"page_id=".$post->ID."&":"")."linkdir=".$type.(!empty($id)?"&_id=".$id:"");
 	foreach($_GET as $key => $val){
 		if($key!="linkdir"&&$key!="_id"&&$key!="_page"){
 			$str .= "&".urlencode($key)."=".urlencode($val);
