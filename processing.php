@@ -472,25 +472,15 @@ $GLOBALS['x'] =$GLOBALS['x'].
 }
 
 function getlink($type,$id = "",$page = ""){
-        global $post;
-        $dir = $_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI'] ;
-        $parsedURL = parse_url ($dir);
-        
-        $splitPath = explode ('/', $parsedURL['path']); 
-       
-
-        $str = get_option("siteurl")."/". $splitPath[2] ."/?".(!isset($_GET['post_id'])?"post_id=".$post->ID."&":"")."linkdir=".$type.(!empty($id)?"&_id=".$id:"");
-        //default url 
-        //?post_id=2&linkdir=cat&_id=2&page_id=2#linkdir
-        
-        //seo url
-        //?post_id=2&linkdir=cat&_id=2#linkdir
-        foreach($_GET as $key => $val){
-                if($key!="linkdir"&&$key!="_id"&&$key!="_page"){
-                        $str .= "&".urlencode($key)."=".urlencode($val);
-                }
-        }
-        return $str.(!empty($page)?"&_page=".$page:"")."#linkdir";
+	global $post;
+	$str = 
+get_option("siteurl")."/?".(!isset($_GET['page_id'])?"page_id=".$post->ID."&":"")."linkdir=".$type.(!empty($id)?"&_id=".$id:"");
+	foreach($_GET as $key => $val){
+		if($key!="linkdir"&&$key!="_id"&&$key!="_page"){
+			$str .= "&".urlencode($key)."=".urlencode($val);
+		}
+	}
+	return $str.(!empty($page)?"&_page=".$page:"")."#linkdir";
 }
 
 function load_cats($full = false){
