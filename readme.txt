@@ -1,7 +1,7 @@
 === Link Directory Plugin ===
 Contributors: WinWinHost
 Donate link: none
-Tags: website directory, directory plugin, link directory, winwinhost
+Tags: link directory plugin, website directory, directory plugin, link plugin, link directory, link dir, website plugin directory, winwinhost
 Requires at least: 2.5.1
 Tested up to: 3.2.1
 Stable tag: trunk
