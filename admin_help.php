@@ -24,7 +24,7 @@ div.winwin a{
 }
 </style>
 
-<div class="winwin">THE PLUGIN IS BROUGHT TO YOU BY<a href="http://www.winwinhost.com/"></a></div>
+<div class="winwin">THE PLUGIN IS BROUGHT TO YOU BY<a href="http://www.winwinhost.com/" title="Windows Web Hosting">WinWinHost, Inc.</a></div>
 
 
 <p><strong>1. How can I get it working?</strong></p>
