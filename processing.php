@@ -16,6 +16,7 @@ define("ID2",$_GET['id'],true);
 define("IS_POST",strtolower($_SERVER['REQUEST_METHOD'])=="post"?true:false,true);
 $x = "";
 
+
 $options = array(
 	"linkdir_db_version" => LINKDIR_DB_VER,
 	"linkdir_core_version" => LINKDIR_VER,
@@ -88,7 +89,7 @@ function load_linkdir($content){
 				x('<form method="post" action="'.htmlspecialchars($_SERVER['REQUEST_URI']).'#linkdir">');
 					x('<p><label class="linkdir_label" for="linkdirname">Title:</label> <input type="text" id="linkdirname" name="___title" value="" maxlength="35" /></p>');
 					x('<p><label class="linkdir_label" for="linkdirdescription">Short Description:</label> <textarea id="linkdirdescription" name="___desc" /></textarea></p>');
-					x('<p><label class="linkdir_label" for="urlinput">Site URL:</label> <input id="urlinput" type="text" name="___url" value="http://" maxlength="100" /><br /><span class="linkdir_desc">Example: http://google.com/, http://news.yahoo.com/ and so on...</span></p>');
+					x('<p><label class="linkdir_label" for="urlinput">Site URL:</label> <input id="urlinput" type="text" name="___url" value="http://" maxlength="1000" /><br /><span class="linkdir_desc">Example: http://google.com/, http://news.yahoo.com/ and so on...</span></p>');
 					x('<p><label class="linkdir_label" for="linkdircat">Category:</label> <select name="___cat" id="linkdircat">');
 						$cats = load_cats();
 						if(count($cats)>0):
@@ -136,7 +137,10 @@ function load_linkdir($content){
 
 								get_option("show_thumbnails")==1?x('<a style="display:block;margin-right:15px;float:left;width:100px;height:68px;background:url(http://api1.thumbalizr.com/?url='.($row['ssl']==1?"https://":"http://").$row['url'].'&width=100) 0 0 no-repeat scroll;" href="'.($row['ssl']==1?"https://":"http://").$row['url']."/".'" onClick="count_out('.$row['id'].')" target="_blank"></a>'):NULL;
 
-								x('<a target="_blank" '.$rel.' href="'.($row['ssl']==1?"https://":"http://").$row['url']."/".'" onClick="count_out('.$row['id'].')">'.htmlspecialchars(stripslashes($row['name'])).'</a>');
+								x('<a target="_blank" '.$rel.' href="'.($row['ssl']==1?"https://":"http://").$row['url']."/".'" onClick="count_out('.$row['id'].')">'
+								.htmlspecialchars(stripslashes($row['name'])).'</a>');
+								 
+								
 
 								x(' <span class="linkdir_small_url">'.$row['url'].'</span>');
 
@@ -472,15 +476,26 @@ $GLOBALS['x'] =$GLOBALS['x'].
 }
 
 function getlink($type,$id = "",$page = ""){
-	global $post;
-	$str = 
-get_option("siteurl")."/?".(!isset($_GET['page_id'])?"page_id=".$post->ID."&":"")."linkdir=".$type.(!empty($id)?"&_id=".$id:"");
-	foreach($_GET as $key => $val){
-		if($key!="linkdir"&&$key!="_id"&&$key!="_page"){
-			$str .= "&".urlencode($key)."=".urlencode($val);
-		}
-	}
-	return $str.(!empty($page)?"&_page=".$page:"")."#linkdir";
+        global $post;
+        $dir = $_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI'] ;
+        $parsedURL = parse_url ($dir);
+
+        
+        $splitPath = explode ('/', $parsedURL['path']); 
+        
+        $str = get_option("siteurl")."/".$splitPath[2] ."/?".(!isset($_GET['post_id'])?"post_id=".$post->ID."&":"")."linkdir=".$type.(!empty($id)?"&_id=".$id:"");
+        //default url 
+        //?post_id=2&linkdir=cat&_id=2&page_id=2#linkdir
+        
+        //seo url
+        //?post_id=2&linkdir=cat&_id=2#linkdir
+        foreach($_GET as $key => $val){
+                if($key!="linkdir"&&$key!="_id"&&$key!="_page"){
+                        $str .= "&".urlencode($key)."=".urlencode($val);
+                }
+        }
+        return $str.(!empty($page)?"&_page=".$page:"")."#linkdir";
+        
 }
 
 function load_cats($full = false){
@@ -509,7 +524,7 @@ function form_addnew(){
 		if(get_option("recaptcha")==1){
 			require_once("recaptcha.php");
 			$resp = recaptcha_check_answer(get_option("recaptcha_private"),$_SERVER["REMOTE_ADDR"],$_POST["recaptcha_challenge_field"],$_POST["recaptcha_response_field"]);
-
+			
 			if($resp->is_valid){
 				$continue = true;
 			}else{
@@ -522,21 +537,25 @@ function form_addnew(){
 
 			// Check domain name
 			$ssl = substr($_POST['___url'],0,5)=="https"?1:0;
-			$_POST['___url'] = preg_replace("/https\:\/\//","http://",$_POST['___url']);
-			preg_match('@^(?:http://)?([^/]+)@i',$_POST['___url'],$matches);
-			$host = strtolower($matches[1]);
-
-			if(strlen($host)<4||!is_valid_domain_name($host)){
+			//$_POST['___url'] = preg_replace("/https\:\/\//","http://",$_POST['___url']);
+			//preg_match('@^(?:http://)?([^/]+)@i',$_POST['___url'],$matches);
+			//$host = strtolower($matches[1]);
+			$host = $_POST['___url'];
+			
+			//if(strlen($host)<4||!is_valid_domain_name($host)){
+				if(strlen($host)<4){
 				$error_msg = "The URL you've entered doesn't seem to be valid.";
-			}else{
+			}//else{
 				// Check if it is blacklisted
-				$var = explode(".",$host); krsort($var);
+			/*	$var = explode(".",$host); krsort($var);
+			 
 				$add = ""; $domain = ""; $check = array();
 				foreach($var as $part){
 					$add = empty($domain)?$part:$part.".";
 					$domain = $add.$domain;
-					$check[$domain] = $domain;
+					echo $check[$domain] = $domain;
 				}
+				die();
 
 				$forbidden_domains = get_option("forbidden_domains");
 				$forbidden_domains = !is_array($forbidden_domains)?array():$forbidden_domains;
@@ -551,12 +570,16 @@ function form_addnew(){
 				// Check if it already exists
 				$type1 = substr($host,0,4)=="www."?substr($host,4):$host;
 				$type2 = substr($host,0,4)=="www."?$host:"www.".$host;
+				//echo $host."<br />";
+				//echo $type1."<br />";
+				//echo $type2;
+				//die();
 				$query = mysql_query("SELECT * FROM ".LINKDIR_TABLE." WHERE url='$type1' OR url='$type2';");
 				if(mysql_num_rows($query)>0){
 					$error_msg = "This URL already exists in our listing.";
-				}
-			}
-
+				} 
+			//}
+				*/
 			// Category
 			if(is_numeric($_POST['___cat'])){
 				if(mysql_num_rows(mysql_query("SELECT id FROM ".LINKDIR_TABLE_CATS." WHERE id='".addslashes($_POST['___cat'])." LIMIT 0,1';"))>0){
@@ -578,7 +601,8 @@ function form_addnew(){
 
 			$forbidden_ips = get_option('forbidden_ips');
 			$forbidden_ips = !is_array($forbidden_ips)?array():$forbidden_ips;
-
+			
+			
 			if(array_key_exists($_SERVER['REMOTE_ADDR'],$forbidden_ips)){
 				$error_msg = "Sorry, there was an error submitting your URL.";
 			}
@@ -587,6 +611,9 @@ function form_addnew(){
 		$error = !empty($error_msg)?true:false;
 
 		if(!$error){
+			
+  
+
 			url_new($host,$ssl,$_POST['___cat'],$_POST['___title'],$_POST['___desc']);
 
 			$success_msg = "Your URL has been submitted. Thanks!";
@@ -605,6 +632,8 @@ function form_addnew(){
 }
 
 function url_new($host,$ssl,$cat,$title,$desc){
+
+	
 	$host = addslashes($host);
 	$title = addslashes($title);
 	$desc = addslashes($desc);
@@ -613,9 +642,13 @@ function url_new($host,$ssl,$cat,$title,$desc){
 		"agent"	=> $_SERVER['HTTP_USER_AGENT'],
 		"etc"	=> $_SERVER
 	)));
+    $host = str_replace("https://", "",$host);
+    $host = str_replace("http://", "",$host);
+    
+    
 
 	mysql_query("INSERT INTO ".LINKDIR_TABLE." (name,url,cat,`ssl`,description,submitted_by,submitted_on,hitsin,hitsout,pagerank) VALUES('$title','$host','$cat','$ssl','$desc','$submitted','".time()."','0','0','777');");
-
+	
 	return true;
 }
 
@@ -628,6 +661,7 @@ function is_valid_domain_name($domain_name){
 	}
 	return true;
 }
+ 
 
 function cat_exists($id = true){
 	$id = $id===true?ID:$id;
@@ -668,13 +702,14 @@ function linkdir_self(){
 	$ok = preg_replace("/https\:\/\//","http://",get_option("siteurl"));
 	preg_match('@^(?:http://)?([^/]+)@i',$ok,$matches);
 	$host = strtolower($matches[1]);
+
 	$host = preg_replace("/www\./","",$host);
 
 	$ok2 = preg_replace("/https\:\/\//","http://",$_SERVER['HTTP_REFERER']);
 	preg_match('@^(?:http://)?([^/]+)@i',$ok2,$matches);
 	$host2 = strtolower($matches[1]);
 	$host2 = preg_replace("/www\./","",$host2);
-
+    
 	return $host==$host2?true:false;
 }
 
