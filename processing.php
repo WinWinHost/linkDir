@@ -483,7 +483,7 @@ function getlink($type,$id = "",$page = ""){
         
         $splitPath = explode ('/', $parsedURL['path']); 
         
-        $str = get_option("siteurl")."/".$splitPath[2] ."/?".(!isset($_GET['post_id'])?"post_id=".$post->ID."&":"")."linkdir=".$type.(!empty($id)?"&_id=".$id:"");
+        $str = get_option("siteurl")."/".$splitPath[2] ."/?".(!isset($_GET['page_id'])?"page_id=".$post->ID."&":"")."linkdir=".$type.(!empty($id)?"&_id=".$id:"");
         //default url 
         //?post_id=2&linkdir=cat&_id=2&page_id=2#linkdir
         
