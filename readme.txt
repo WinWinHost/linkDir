@@ -4,7 +4,7 @@ Donate link: none
 Tags: link directory plugin, website directory, directory plugin, link plugin, link directory, link dir, website plugin directory, winwinhost
 Requires at least: 2.5.1
 Tested up to: 3.3.1
-Stable tag: trunk
+Stable tag: 2.1
 
 == Description ==
 With this plugin you can make a website directory where visitors can add new websites.You also have the posibility to add new categories from your Dashboard and new websites into categories from your website directory page.
