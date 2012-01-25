@@ -3,7 +3,7 @@ Contributors: WinWinHost
 Donate link: none
 Tags: link directory plugin, website directory, directory plugin, link plugin, link directory, link dir, website plugin directory, winwinhost
 Requires at least: 2.5.1
-Tested up to: 3.2.1
+Tested up to: 3.3.1
 Stable tag: trunk
 
 == Description ==
@@ -41,11 +41,10 @@ This is a very first release of the plugin, so bugs are predicted to show up. It
 None
 
 == Changelog ==
-= Version 1.3 =
+= Version 2.1 =
 
 == Upgrade Notice ==
-We fixed some bugs in the plugin display so now the plugin can be used on any of your website pages.
-
+We fixed some bugs in the plugin so now you can add deep links into your directory.
 
 
 
